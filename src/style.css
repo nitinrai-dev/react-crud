@@ -1,0 +1,74 @@
+body {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	place-items: center;
+	background: #000;
+	color: #fff;
+	overflow: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#root {
+	background: #222;
+	padding: 2rem;
+	margin-inline: auto;
+	border-radius: 10px;
+    min-width: 400px;
+}
+
+label {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+input {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 1rem;
+	border-radius: 4px;
+	border: 0;
+	max-width: 500px;
+}
+
+button {
+	background: blueviolet;
+	padding: 0.6rem 1.2rem;
+	font-size: 14px;
+	border: 0;
+	color: #fff;
+	letter-spacing: 1px;
+	border-radius: 10rem;
+    cursor: pointer;
+    transition: 300ms ease-in-out;
+}
+.delete--button {
+    background: crimson;
+}
+button:hover {
+	filter: saturate(1.5);
+}
+
+table {
+	width: 100%;
+}
+
+th {
+	text-align: left;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-weight: normal;
+	letter-spacing: 1px;
+}
+
+td > button {
+	margin-left: 0.3rem;
+}
+td button {
+	font-size: 11px;
+	padding: 0.4rem 0.8rem;
+}
