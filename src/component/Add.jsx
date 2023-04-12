@@ -3,40 +3,54 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 const Add = () => {
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    location: "",
+  });
   const navigate = useNavigate();
   const KEY = import.meta.env.VITE_MOCK_API;
 
-  const postData = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      await axios.post(`https://${KEY}.mockapi.io/users`, {
-        name,
-        location,
-      });
+      await axios.post(`https://${KEY}.mockapi.io/users`, formData);
       navigate('/read');
     } catch (error) {
       console.error(error);
     }
   };
 
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div>
-        <label>Name</label>
-        <input placeholder="Name" onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div>
-        <label>Location</label>
+        <label htmlFor="name">Name</label>
         <input
-          placeholder="Location"
-          onChange={(e) => setLocation(e.target.value)}
+          id="name"
+          name="name"
+          type="text"
+          value={formData.name}
+          onChange={handleChange}
         />
       </div>
-      <button type="submit" onClick={postData}>
-        Submit
-      </button>
-    </>
+      <div>
+        <label htmlFor="location">Location</label>
+        <input
+          id="location"
+          name="location"
+          type="text"
+          value={formData.location}
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   );
 };
 
