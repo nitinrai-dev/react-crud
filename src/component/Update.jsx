@@ -8,6 +8,7 @@ const Update = () => {
     name: "",
     location: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const KEY = import.meta.env.VITE_MOCK_API;
 
@@ -19,9 +20,12 @@ const Update = () => {
     });
   }, []);
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
     try {
       await axios.put(`https://${KEY}.mockapi.io/users/${formData.id}`, formData);
+      setIsLoading(false);
       navigate('/read');
     } catch (error) {
       console.error(error);
@@ -36,7 +40,7 @@ const Update = () => {
   };
 
   return (
-    <div>
+    <form onSubmit={handleUpdate}>
       <div className="create-form">
         <div>
           <label htmlFor="name">Name</label>
@@ -58,11 +62,9 @@ const Update = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" onClick={handleUpdate}>
-          Update
-        </button>
+        <button type="submit" disabled={isLoading}>{isLoading ? "Wait.." : "Update"}</button>
       </div>
-    </div>
+    </form>
   );
 };
 
